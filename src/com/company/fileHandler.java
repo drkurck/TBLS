@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class fileHandler {
@@ -22,8 +22,9 @@ public class fileHandler {
     /**
      * Reading the file to save all history state
      */
-    public void readFile() {
+    public History readFile() {
         Path file = Paths.get(this.statePath);
+        History h = new History();
         try (InputStream in = Files.newInputStream(file);
              BufferedReader reader =
                      new BufferedReader(new InputStreamReader(in))) {
@@ -41,11 +42,13 @@ public class fileHandler {
                 }
                 State current = new State(splitedLine[0], Float.parseFloat(splitedLine[1]),  Float.parseFloat(splitedLine[2]), Float.parseFloat(splitedLine[3]));
                 State previous = new State(splitedLine[4], Float.parseFloat(splitedLine[5]),  Float.parseFloat(splitedLine[6]), Float.parseFloat(splitedLine[7]));
-                System.out.println(Arrays.toString(splitedLine));
+
+                h.addElement(new Situation(current, previous));
             }
         } catch (IOException x) {
             System.err.println(x);
         }
+        return h;
     }
 
 

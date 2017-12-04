@@ -4,7 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
         fileHandler fh = new fileHandler("situation transition.txt","");
-        fh.readFile();
+        History allSituation = fh.readFile();
+
+        System.out.println(allSituation.getHistorySituation().toString());
 	// write your code here
     }
 }
