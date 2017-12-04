@@ -14,9 +14,11 @@ public class TBLS {
     private float s;
     private float x;
     private float y;
+    private float z;
     private Situation S;
+    private History H;
 
-    public TBLS(Situation s1) {
+    public TBLS(Situation s1, History h1) {
         this.a = 0;
         this.b = 0;
         this.d = 0;
@@ -25,6 +27,7 @@ public class TBLS {
         this.s = 0;
         this.x = 0;
         this.y = 0;
+        H = h1;
         S = s1;
     }
 
@@ -34,17 +37,19 @@ public class TBLS {
             a = computeA();
             writeResultInFile(b, d, u, a);
         } else {
-            // TODO : Get previous situation
-            S = getPreviousSituation();
+            State previousState = S.getPrevious();
             // TODO : Get records ... all
-            for (Situation record : recordList) {
-                temp = Cnext - Cprev;
+            float temp = 0;
+            for (Situation record : H.getHistorySituation()) {
+                temp += Cnext - Cprev;
             }
-            if (temp/recordList.lenght() > 0) {
+            if (temp/H.getHistorySituation().size() > 0) {
                 r = r+1;
                 s = s+1;
                 x = r/(r+s);
             }
+
+            // User enter opinion between 0 and 1
             Scanner reader = new Scanner(System.in);
             boolean loop = true;
             while (loop) {
@@ -67,9 +72,7 @@ public class TBLS {
 
     // Compute A
     public float computeA() {
-        // TODO : Get number of situation
-
-        return 1/nbSituation;
+        return 1/H.getHistorySituation().size();
     }
 
     // Write result on a file
