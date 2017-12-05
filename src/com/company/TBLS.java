@@ -38,12 +38,13 @@ public class TBLS {
             writeResultInFile(b, d, u, a);
         } else {
             State previousState = S.getPrevious();
-            // TODO : Get records ... all
-            float temp = 0;
+            float tempR = 0;
+            float tempS = 0;
             for (Situation record : H.getHistorySituation()) {
-                temp += Cnext - Cprev;
+                tempR += record.Rnext - record.Rprev;
+                tempS += record.Snext - record.Sprev;
             }
-            if (temp/H.getHistorySituation().size() > 0) {
+            if (tempR/H.getHistorySituation().size() > 0) {
                 r = r+1;
                 s = s+1;
                 x = r/(r+s);
