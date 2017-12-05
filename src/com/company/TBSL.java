@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -31,11 +32,11 @@ public class TBSL {
     }
 
     // Start calculate TBSL
-    public double[] execTBLS(double b, double d, double u) {
+    public double[] execTBLS(double b, double d, double u, String outPath) throws IOException {
 
         if (u == 1 && b == 0 && d == 0) {
             a = computeA();
-            fileHandler.writeResultInFile(b, d, u, a);
+            fileHandler.writeResultInFile(b, d, u, a, outPath);
         } else {
             double temp = 0;
             for (Situation record : H.getHistorySituation()) {
@@ -58,12 +59,16 @@ public class TBSL {
             System.out.println("Enter a number between 0 and 1 : ");
             z = Double.parseDouble(reader.nextLine());
 
-            y = z-1;
+            y = 1-z;
             b = (z/z + y + (1-x));
             d = (y/z + y + (1-x));
             u = 1-x/(z + y + (1-x));
-
-            fileHandler.writeResultInFile(b, d, u, a);
+            System.out.println(y);
+            System.out.println(z);
+            System.out.println(b);
+            System.out.println(d);
+            System.out.println(u);
+            fileHandler.writeResultInFile(b, d, u, a, outPath);
         }
         double[] result = {b, d, u};
         return result;

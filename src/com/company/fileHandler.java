@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -11,9 +12,12 @@ public class fileHandler {
     private String statePath;
     private String outPath;
 
-    public fileHandler(String statePath, String outPath) {
+    public fileHandler(String statePath, String outPath) throws IOException {
         this.statePath = statePath;
         this.outPath = outPath;
+        File file = new File(outPath);
+
+        file.createNewFile();
     }
 
     /**
@@ -49,17 +53,17 @@ public class fileHandler {
     }
 
     // Write result on a file
-    static public void writeResultInFile(double b, double d, double u, double a) {
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter("result.txt", "UTF-8");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        writer.println(b + " " + d + " " + u + " " + a + " " );
-        writer.close();
+    static public void writeResultInFile(double b, double d, double u, double a, String fileName) throws IOException {
+        String text = b + ";" + d + ";" + u + ";" + a + "\n";
+        Files.write(Paths.get(fileName), text.getBytes(), StandardOpenOption.APPEND);
+    }
+
+    public String getOutPath() {
+        return outPath;
+    }
+
+    public void setOutPath(String outPath) {
+        this.outPath = outPath;
     }
 
     public String getStatePath() {
@@ -70,11 +74,4 @@ public class fileHandler {
         this.statePath = statePath;
     }
 
-    public String getOutPath() {
-        return outPath;
-    }
-
-    public void setOutPath(String outPath) {
-        this.outPath = outPath;
-    }
 }
