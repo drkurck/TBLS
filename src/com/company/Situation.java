@@ -8,7 +8,13 @@ public class Situation {
         this.current = current;
         this.previous = previous;
     }
+    static public double computeOutcome(Situation s) {
+        double health = s.current.getHealth() - s.getPrevious().getHealth();
+        double maturity = s.current.getMaturity() - s.getPrevious().getMaturity();
+        double socialisation = s.current.getSocialisation() - s.getPrevious().getSocialisation();
 
+        return health+maturity+socialisation;
+    }
     public State getCurrent() {
         return current;
     }
@@ -24,4 +30,5 @@ public class Situation {
     public void setPrevious(State previous) {
         this.previous = previous;
     }
+
 }
