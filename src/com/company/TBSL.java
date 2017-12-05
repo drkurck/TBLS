@@ -54,7 +54,7 @@ public class TBSL {
             Scanner reader = new Scanner(System.in);
             System.out.println("revelancy : "+ x);
             System.out.println("Enter a number between 0 and 1 : ");
-            z = reader.nextDouble();
+            z = (double) reader.nextLine();
             reader.close();
 
             y = z-1;
@@ -70,6 +70,4 @@ public class TBSL {
     public float computeA() {
         return 1/H.getHistorySituation().size();
     }
-
-
 }
