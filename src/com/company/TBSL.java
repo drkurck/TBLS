@@ -54,7 +54,7 @@ public class TBSL {
             Scanner reader = new Scanner(System.in);
             System.out.println("revelancy : "+ x);
             System.out.println("Enter a number between 0 and 1 : ");
-            z = (double) reader.nextLine();
+            z = Double.parseDouble(reader.nextLine());
             reader.close();
 
             y = z-1;
