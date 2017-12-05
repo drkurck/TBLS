@@ -50,6 +50,9 @@ public class TBSL {
             } else {
                 s = s+1;
             }
+            System.out.println(r);
+            System.out.println(s);
+            System.out.println("==============================");
             x = r/(r+s);
 
             // User enter opinion between 0 and 1
@@ -68,6 +71,7 @@ public class TBSL {
             System.out.println(b);
             System.out.println(d);
             System.out.println(u);
+            a = computeA();
             fileHandler.writeResultInFile(b, d, u, a, outPath);
         }
         double[] result = {b, d, u};
