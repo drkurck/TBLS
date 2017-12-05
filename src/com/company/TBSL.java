@@ -3,6 +3,7 @@ package com.company;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Scanner;
 
 public class TBSL {
@@ -30,7 +31,8 @@ public class TBSL {
     }
 
     // Start calculate TBSL
-    public void startTBLS(double b, double d, double u) {
+    public double[] execTBLS(double b, double d, double u) {
+
         if (u == 1 && b == 0 && d == 0) {
             a = computeA();
             fileHandler.writeResultInFile(b, d, u, a);
@@ -55,7 +57,6 @@ public class TBSL {
             System.out.println("revelancy : "+ x);
             System.out.println("Enter a number between 0 and 1 : ");
             z = Double.parseDouble(reader.nextLine());
-            reader.close();
 
             y = z-1;
             b = (z/z + y + (1-x));
@@ -64,6 +65,9 @@ public class TBSL {
 
             fileHandler.writeResultInFile(b, d, u, a);
         }
+        double[] result = {b, d, u};
+        return result;
+
     }
 
     // Compute A

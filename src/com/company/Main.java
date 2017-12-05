@@ -7,8 +7,11 @@ public class Main {
         History allSituation = fh.readFile();
 
         TBSL test = new TBSL(allSituation);
-        test.startTBLS(0,0,0);
-        System.out.println(allSituation.getHistorySituation().toString());
-	// write your code here
+
+        double[] tmp = test.execTBLS(0,0,0);
+
+        for (int i = 0; i < 10; i++) {
+            test.execTBLS(tmp[0], tmp[1], tmp[2]);
+        }
     }
 }
