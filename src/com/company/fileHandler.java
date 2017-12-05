@@ -1,9 +1,6 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -51,6 +48,19 @@ public class fileHandler {
         return h;
     }
 
+    // Write result on a file
+    static public void writeResultInFile(double b, double d, double u, double a) {
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("result.txt", "UTF-8");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        writer.println(b + " " + d + " " + u + " " + a + " " );
+        writer.close();
+    }
 
     public String getStatePath() {
         return this.statePath;
