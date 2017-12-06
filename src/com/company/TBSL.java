@@ -73,7 +73,7 @@ public class TBSL {
 
     }*/
 
-    public void execTBLS(String outPath, Situation prevSituation) throws IOException {
+    public Situation execTBLS(String outPath, Situation prevSituation) throws IOException {
         if (u == 1 && b == 0 && d == 0) {
             a = this.computeA();
             fileHandler.writeResultInFile(b, d, u, a, outPath);
@@ -105,7 +105,7 @@ public class TBSL {
 
         }
 
-
+        return null;
     }
     // Compute A
     public float computeA() {

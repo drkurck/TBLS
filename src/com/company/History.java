@@ -14,7 +14,7 @@ public class History {
     public List<Situation> searchSimilarSituation(Situation search) {
         List<Situation> extracted = new ArrayList<Situation>();
         for (Situation s: this.historySituation) {
-            if (s.getPrevious().getName().equals(search.getPrevious().getName()) &&
+            if (s.getNext().getName().equals(search.getNext().getName()) &&
                     s.getCurrent().getName().equals(search.getCurrent().getName())) {
                 extracted.add(s);
             }

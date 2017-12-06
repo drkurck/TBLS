@@ -42,9 +42,9 @@ public class fileHandler {
                     ++index;
                 }
                 State current = new State(splitedLine[0], Float.parseFloat(splitedLine[1]),  Float.parseFloat(splitedLine[2]), Float.parseFloat(splitedLine[3]));
-                State previous = new State(splitedLine[4], Float.parseFloat(splitedLine[5]),  Float.parseFloat(splitedLine[6]), Float.parseFloat(splitedLine[7]));
+                State next = new State(splitedLine[4], Float.parseFloat(splitedLine[5]),  Float.parseFloat(splitedLine[6]), Float.parseFloat(splitedLine[7]));
 
-                h.addElement(new Situation(current, previous));
+                h.addElement(new Situation(current, next));
             }
         } catch (IOException x) {
             System.err.println(x);

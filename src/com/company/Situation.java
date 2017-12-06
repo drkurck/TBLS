@@ -2,16 +2,16 @@ package com.company;
 
 public class Situation {
     private State current;
-    private State previous;
+    private State next;
 
-    public Situation(State current, State previous) {
+    public Situation(State current, State next) {
         this.current = current;
-        this.previous = previous;
+        this.next = next;
     }
     static public double computeOutcome(Situation s) {
-        double health = s.current.getHealth() - s.getPrevious().getHealth();
-        double maturity = s.current.getMaturity() - s.getPrevious().getMaturity();
-        double socialisation = s.current.getSocialisation() - s.getPrevious().getSocialisation();
+        double health = s.next.getHealth() - s.current.getHealth();
+        double maturity = s.next.getMaturity() - s.current.getMaturity();
+        double socialisation = s.next.getSocialisation() - s.current.getSocialisation();
 
         return health+maturity+socialisation;
     }
@@ -20,7 +20,7 @@ public class Situation {
     public String toString() {
         return "Situation{" +
                 "current=" + current.toString() +
-                ", previous=" + previous.toString() +
+                ", next=" + next.toString() +
                 '}';
     }
 
@@ -32,12 +32,12 @@ public class Situation {
         this.current = current;
     }
 
-    public State getPrevious() {
-        return previous;
+    public State getNext() {
+        return next;
     }
 
-    public void setPrevious(State previous) {
-        this.previous = previous;
+    public void setNext(State next) {
+        this.next = next;
     }
 
 }
