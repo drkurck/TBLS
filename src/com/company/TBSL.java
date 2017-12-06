@@ -79,9 +79,11 @@ public class TBSL {
             fileHandler.writeResultInFile(b, d, u, a, outPath);
         } else {
             List<Situation> extractedTrace = trace.searchSimilarSituation(prevSituation);
+            System.out.println(trace.getHistorySituation().size());
+            System.out.println(extractedTrace.size());
             double tmp = 0;
-            for (Situation s: extractedTrace) {
-                tmp += Situation.computeOutcome(s);
+            for (Situation tmpSituation: extractedTrace) {
+                tmp += Situation.computeOutcome(tmpSituation);
             }
             if (tmp > 0)
                 this.r++;
@@ -91,10 +93,11 @@ public class TBSL {
             this.computeRevelancy();
 
             // User enter opinion between 0 and 1
-            // TODO error handling
-            System.out.printf(prevSituation.toString());
+            // TODO: error handling
+
+            System.out.println(prevSituation.toString());
             Scanner reader = new Scanner(System.in);
-            System.out.println("\nRevelancy : "+ this.x);
+            System.out.println("Revelancy : "+ this.x);
             System.out.println("Enter a number between 0 and 1 : ");
             this.z = Double.parseDouble(reader.nextLine());
 
@@ -108,8 +111,8 @@ public class TBSL {
         return null;
     }
     // Compute A
-    public float computeA() {
-        return 1/trace.getHistorySituation().size();
+    public double computeA() {
+        return (double) 1/trace.getHistorySituation().size();
     }
 
     public void computeRevelancy() {
@@ -121,5 +124,11 @@ public class TBSL {
         this.b = (this.z/this.z + this.y + (1-this.x));
         this.d = (this.y/this.z + this.y + (1-this.x));
         this.u = 1-this.x/(this.z + this.y + (1-this.x));
+    }
+
+    public void statisicalEvidence() {
+        this.b = (this.r) / (this.r+ this.s+2);
+        this.d = (this.s) / (this.r+ this.s+2);
+        this.u = 2 / (this.r+this.s+2);
     }
 }
