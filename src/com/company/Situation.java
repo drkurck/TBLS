@@ -15,6 +15,15 @@ public class Situation {
 
         return health+maturity+socialisation;
     }
+
+    @Override
+    public String toString() {
+        return "Situation{" +
+                "current=" + current.toString() +
+                ", previous=" + previous.toString() +
+                '}';
+    }
+
     public State getCurrent() {
         return current;
     }

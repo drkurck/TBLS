@@ -1,9 +1,7 @@
 package com.company;
 
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,12 +10,13 @@ public class TBSL {
     private double b;
     private double d;
     private double u;
-    private double r;
-    private double s;
+    private double r; //positive outcome
+    private double s; //negative outcome
     private double x;
     private double y;
     private double z;
-    private History H;
+    private History trace;
+    //private Situation prevSituation;
 
     public TBSL(History h1) {
         this.a = 0;
@@ -28,11 +27,11 @@ public class TBSL {
         this.s = 0;
         this.x = 0;
         this.y = 0;
-        H = h1;
+        this.trace = h1;
     }
 
     // Start calculate TBSL
-    public double[] execTBLS(double b, double d, double u, String outPath) throws IOException {
+    /*public double[] execTBLS(double b, double d, double u, String outPath) throws IOException {
 
         if (u == 1 && b == 0 && d == 0) {
             a = computeA();
@@ -45,14 +44,13 @@ public class TBSL {
                     temp += tempOutcome;
                 }
             }
-            if (temp/H.getHistorySituation().size() > 0) {
-                r = r+1;
-            } else {
-                s = s+1;
-            }
-            System.out.println(r);
-            System.out.println(s);
-            System.out.println("==============================");
+            System.out.println(temp);
+            if (temp > 0)
+                r++;
+            else
+                s++;
+
+
             x = r/(r+s);
 
             // User enter opinion between 0 and 1
@@ -66,21 +64,62 @@ public class TBSL {
             b = (z/z + y + (1-x));
             d = (y/z + y + (1-x));
             u = 1-x/(z + y + (1-x));
-            System.out.println(y);
-            System.out.println(z);
-            System.out.println(b);
-            System.out.println(d);
-            System.out.println(u);
+
             a = computeA();
             fileHandler.writeResultInFile(b, d, u, a, outPath);
         }
         double[] result = {b, d, u};
         return result;
 
-    }
+    }*/
 
+    public void execTBLS(String outPath, Situation prevSituation) throws IOException {
+        if (u == 1 && b == 0 && d == 0) {
+            a = this.computeA();
+            fileHandler.writeResultInFile(b, d, u, a, outPath);
+        } else {
+            List<Situation> extractedTrace = trace.searchSimilarSituation(prevSituation);
+            double tmp = 0;
+            for (Situation s: extractedTrace) {
+                tmp += Situation.computeOutcome(s);
+            }
+            if (tmp > 0)
+                this.r++;
+            else
+                this.s++;
+
+            this.computeRevelancy();
+
+            // User enter opinion between 0 and 1
+            // TODO error handling
+            System.out.printf(prevSituation.toString());
+            Scanner reader = new Scanner(System.in);
+            System.out.println("\nRevelancy : "+ this.x);
+            System.out.println("Enter a number between 0 and 1 : ");
+            this.z = Double.parseDouble(reader.nextLine());
+
+            this.normalizeResult();
+
+            this.a = computeA();
+            fileHandler.writeResultInFile(this.b, this.d, this.u, this.a, outPath);
+
+        }
+
+
+    }
     // Compute A
     public float computeA() {
-        return 1/H.getHistorySituation().size();
+        return 1/trace.getHistorySituation().size();
+    }
+
+    public void computeRevelancy() {
+        this.x = this.r/(this.r+this.s);
+    }
+
+    public void normalizeResult() {
+        this.y = 1-this.z;
+        this.b = (this.z/this.z + this.y + (1-this.x));
+        this.d = (this.y/this.z + this.y + (1-this.x));
+        this.u = 1-this.x/(this.z + this.y + (1-this.x));
     }
 }

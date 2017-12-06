@@ -11,6 +11,18 @@ public class History {
         this.historySituation = new ArrayList<Situation>();
     }
 
+    public List<Situation> searchSimilarSituation(Situation search) {
+        List<Situation> extracted = new ArrayList<Situation>();
+        for (Situation s: this.historySituation) {
+            if (s.getPrevious().getName().equals(search.getPrevious().getName()) &&
+                    s.getCurrent().getName().equals(search.getCurrent().getName())) {
+                extracted.add(s);
+            }
+        }
+
+        return extracted;
+    }
+
     public void addElement(Situation s) {
         this.historySituation.add(s);
     }

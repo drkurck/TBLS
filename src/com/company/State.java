@@ -13,6 +13,16 @@ public class State {
         this.maturity = maturity;
     }
 
+    @Override
+    public String toString() {
+        return "State{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", socialisation=" + socialisation +
+                ", maturity=" + maturity +
+                '}';
+    }
+
     public String getName() {
         return name;
     }
