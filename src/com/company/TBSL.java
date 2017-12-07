@@ -54,7 +54,6 @@ public class TBSL {
             x = r/(r+s);
 
             // User enter opinion between 0 and 1
-            // TODO error handling
             Scanner reader = new Scanner(System.in);
             System.out.println("revelancy : "+ x);
             System.out.println("Enter a number between 0 and 1 : ");
