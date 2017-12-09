@@ -23,6 +23,13 @@ public class State {
                 '}';
     }
 
+    public State(String name) {
+        this.name = name;
+        this.health = 0;
+        this.socialisation = 0;
+        this.maturity = 0;
+    }
+
     public String getName() {
         return name;
     }

@@ -19,6 +19,15 @@ public class fileHandler {
         file.createNewFile();
     }
 
+    public fileHandler(String statePath) {
+        this.statePath = statePath;
+    }
+
+    public void createFile(String fileName) throws IOException {
+        File file = new File(fileName);
+
+        file.createNewFile();
+    }
     /**
      * Reading the file to save all history state
      */
