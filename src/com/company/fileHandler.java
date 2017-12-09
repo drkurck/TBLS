@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class fileHandler {
@@ -44,7 +43,8 @@ public class fileHandler {
                 State current = new State(splitedLine[0], Float.parseFloat(splitedLine[1]),  Float.parseFloat(splitedLine[2]), Float.parseFloat(splitedLine[3]));
                 State next = new State(splitedLine[4], Float.parseFloat(splitedLine[5]),  Float.parseFloat(splitedLine[6]), Float.parseFloat(splitedLine[7]));
 
-                h.addElement(new Situation(current, next));
+                h.addSituation(new Situation(current, next));
+                h.addAction(current.getName());
             }
         } catch (IOException x) {
             System.err.println(x);

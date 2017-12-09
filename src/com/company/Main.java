@@ -1,6 +1,8 @@
 package com.company;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
@@ -11,11 +13,12 @@ public class Main {
         TBSL test = new TBSL(allSituation);
         Situation sInit = new Situation(new State ("feeding", 0,0,0), new State("playing", 0,0,0));
 
-        //double[] tmp = test.execTBLS(0,0,0, fh.getOutPath());
-        test.execTBLS(fh.getOutPath(), sInit);
 
-        for (int i = 0; i < 10; i++) {
+        //double[] tmp = test.execTBLS(0,0,0, fh.getOutPath());
+        //test.execTBLS(fh.getOutPath(), sInit);
+
+        //for (int i = 0; i < 10; i++) {
             //test.execTBLS(tmp[0], tmp[1], tmp[2], fh.getOutPath());
-        }
+        //}
     }
 }

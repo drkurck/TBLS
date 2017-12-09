@@ -6,9 +6,11 @@ import java.util.List;
 
 public class History {
     private List<Situation> historySituation;
+    private List<String> actionList;
 
     public History() {
         this.historySituation = new ArrayList<Situation>();
+        this.actionList = new ArrayList<String>();
     }
 
     public List<Situation> searchSimilarSituation(Situation search) {
@@ -23,8 +25,14 @@ public class History {
         return extracted;
     }
 
-    public void addElement(Situation s) {
+    public void addSituation(Situation s) {
         this.historySituation.add(s);
+    }
+
+    public void addAction(String action) {
+        if (!actionList.contains(action)) {
+            actionList.add(action);
+        }
     }
 
     public List<Situation> getHistorySituation() {
@@ -33,5 +41,13 @@ public class History {
 
     public void setHistorySituation(List<Situation> historySituation) {
         this.historySituation = historySituation;
+    }
+
+    public List<String> getActionList() {
+        return actionList;
+    }
+
+    public void setActionList(List<String> actionList) {
+        this.actionList = actionList;
     }
 }
