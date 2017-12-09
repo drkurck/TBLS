@@ -3,7 +3,6 @@ package com.company;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 public class TBSL {
     private double a;
@@ -30,7 +29,7 @@ public class TBSL {
         this.trace = h1;
     }
 
-    /*public Situation execTBLS(String outPath, Situation prevSituation) throws IOException {
+    /*public Situation execTBSL(String outPath, Situation prevSituation) throws IOException {
         if (u == 1 && b == 0 && d == 0) {
             a = this.computeA();
             fileHandler.writeResultInFile(b, d, u, a, outPath);
@@ -58,7 +57,7 @@ public class TBSL {
             System.out.println("Enter a number between 0 and 1 : ");
             this.z = Double.parseDouble(reader.nextLine());
 
-            this.normalizeResult();
+            this.computeTBSL();
 
             this.a = computeA();
             fileHandler.writeResultInFile(this.b, this.d, this.u, this.a, outPath);
@@ -68,12 +67,12 @@ public class TBSL {
         return null;
     }*/
 
-    public void execTBLS(State currentState, String fileName) throws IOException {
+    public void execTBSL(State currentState, String fileName) throws IOException {
         for (String nextAction: trace.getActionList()) {
             Situation situation = new Situation(currentState, new State(nextAction));
 
             if (u == 1 && b == 0 && d == 0) {
-                a = this.computeA();
+                this.computeTBSLAtomicity();
                 fileHandler.writeResultInFile(b, d, u, a, fileName);
             } else {
                 List<Situation> extractedTrace = trace.searchSimilarSituation(situation);
@@ -90,37 +89,46 @@ public class TBSL {
                 this.computeRevelancy();
 
                 //question about intuitive feeling is set in main
-                this.normalizeResult();
+                this.computeTBSL();
 
-                this.a = computeA();
                 fileHandler.writeResultInFile(this.b, this.d, this.u, this.a, fileName);
 
             }
-
         }
-    }
-
-
-    // Compute A
-    public double computeA() {
-        return (double) 1/trace.getHistorySituation().size();
     }
 
     public void computeRevelancy() {
         this.x = this.r/(this.r+this.s);
     }
 
-    public void normalizeResult() {
+    public void computeTBSL() {
         this.y = 1-this.z;
         this.b = (this.z/this.z + this.y + (1-this.x));
         this.d = (this.y/this.z + this.y + (1-this.x));
         this.u = 1-this.x/(this.z + this.y + (1-this.x));
+        this.computeTBSLAtomicity();
     }
 
-    public void statisicalEvidence() {
-        this.b = (this.r) / (this.r+ this.s+2);
-        this.d = (this.s) / (this.r+ this.s+2);
-        this.u = 2 / (this.r+this.s+2);
+    public void computeTBSLAtomicity() {
+        this.a = 1/trace.getHistorySituation().size();
+    }
+
+    public void computeGuideline(int stateCovered) {
+        this.y = 1-this.z;
+        this.b = this.z / (this.z + this.y + (1 - this.x));
+        this.d = this.y / (this.z + this.y + (1 - this.x));
+        this.u = (1 - this.x) / (this.z + this.y + (1 - this.x));
+        this.computeGuidelineAtomicity(stateCovered);
+    }
+
+    public void computeGuidelineAtomicity(int stateCovered) {
+        this.a = stateCovered/trace.getHistorySituation().size();
+    }
+
+    public void computeStatistcalEvidence() {
+        this.b = this.r / (this.r + this.s + 2);
+        this.d = this.s / (this.r + this.s + 2);
+        this.u = 2 / (this.r + this.s + 2);
     }
 
     public double getA() {

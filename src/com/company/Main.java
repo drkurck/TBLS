@@ -15,8 +15,21 @@ public class Main {
         sim.setZ(0.2);
         for (String currentAction: trace.getActionList()) {
             State state = new State(currentAction);
-            sim.execTBLS(state, "TBLS02.csv") ;
+            sim.execTBSL(state, "TBLS02.csv") ;
         }
 
+        fh.createFile("TBLS05.csv");
+        sim.setZ(0.5);
+        for (String currentAction: trace.getActionList()) {
+            State state = new State(currentAction);
+            sim.execTBSL(state, "TBLS05.csv") ;
+        }
+
+        fh.createFile("TBLS07.csv");
+        sim.setZ(0.7);
+        for (String currentAction: trace.getActionList()) {
+            State state = new State(currentAction);
+            sim.execTBSL(state, "TBLS07.csv") ;
+        }
     }
 }
