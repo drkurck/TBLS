@@ -29,44 +29,6 @@ public class TBSL {
         this.trace = h1;
     }
 
-    /*public Situation execTBSL(String outPath, Situation prevSituation) throws IOException {
-        if (u == 1 && b == 0 && d == 0) {
-            a = this.computeA();
-            fileHandler.writeResultInFile(b, d, u, a, outPath);
-        } else {
-            List<Situation> extractedTrace = trace.searchSimilarSituation(prevSituation);
-            System.out.println(trace.getHistorySituation().size());
-            System.out.println(extractedTrace.size());
-            double tmp = 0;
-            for (Situation tmpSituation: extractedTrace) {
-                tmp += Situation.computeOutcome(tmpSituation);
-            }
-            if (tmp > 0)
-                this.r++;
-            else
-                this.s++;
-
-            this.computeRevelancy();
-
-            // User enter opinion between 0 and 1
-            // TODO: error handling
-
-            System.out.println(prevSituation.toString());
-            Scanner reader = new Scanner(System.in);
-            System.out.println("Revelancy : "+ this.x);
-            System.out.println("Enter a number between 0 and 1 : ");
-            this.z = Double.parseDouble(reader.nextLine());
-
-            this.computeTBSL();
-
-            this.a = computeA();
-            fileHandler.writeResultInFile(this.b, this.d, this.u, this.a, outPath);
-
-        }
-
-        return null;
-    }*/
-
     public void execTBSL(State currentState, String fileName) throws IOException {
         for (String nextAction: trace.getActionList()) {
             Situation situation = new Situation(currentState, new State(nextAction));
