@@ -15,7 +15,6 @@ public class TBSL {
     private double y;
     private double z;
     private History trace;
-    //private Situation prevSituation;
 
     public TBSL(History h1) {
         this.a = 0;
@@ -59,11 +58,11 @@ public class TBSL {
         }
     }
 
-    public void computeRevelancy() {
+    private void computeRevelancy() {
         this.x = this.r/(this.r+this.s);
     }
 
-    public void computeTBSL() {
+    private void computeTBSL() {
         this.y = 1-this.z;
         this.b = (this.z/this.z + this.y + (1-this.x));
         this.d = (this.y/this.z + this.y + (1-this.x));
@@ -71,7 +70,7 @@ public class TBSL {
         this.computeTBSLAtomicity();
     }
 
-    public void computeTBSLAtomicity() {
+    private void computeTBSLAtomicity() {
         this.a = 1/trace.getHistorySituation().size();
     }
 
@@ -83,7 +82,7 @@ public class TBSL {
         this.computeGuidelineAtomicity(stateCovered);
     }
 
-    public void computeGuidelineAtomicity(int stateCovered) {
+    private void computeGuidelineAtomicity(int stateCovered) {
         this.a = stateCovered/trace.getHistorySituation().size();
     }
 
@@ -91,6 +90,17 @@ public class TBSL {
         this.b = this.r / (this.r + this.s + 2);
         this.d = this.s / (this.r + this.s + 2);
         this.u = 2 / (this.r + this.s + 2);
+    }
+
+    public void resetVar() {
+        this.a = 0;
+        this.b = 0;
+        this.d = 0;
+        this.u = 0;
+        this.r = 0;
+        this.s = 0;
+        this.x = 0;
+        this.y = 0;
     }
 
     public double getA() {
