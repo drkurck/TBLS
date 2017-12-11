@@ -4,7 +4,7 @@ package com.company;
 import java.io.IOException;
 import java.util.List;
 
-public class TBSL {
+public class Simulation {
     private double a;
     private double b;
     private double d;
@@ -16,7 +16,7 @@ public class TBSL {
     private double z;
     private History trace;
 
-    public TBSL(History h1) {
+    public Simulation(History h1) {
         this.a = 0;
         this.b = 0;
         this.d = 0;
@@ -71,7 +71,9 @@ public class TBSL {
     }
 
     private void computeTBSLAtomicity() {
-        this.a = 1/trace.getHistorySituation().size();
+        System.out.println(trace.getHistorySituation().size());
+        this.a = (double) 1/trace.getHistorySituation().size();
+        System.out.println(this.a);
     }
 
     public void computeGuideline(int stateCovered) {

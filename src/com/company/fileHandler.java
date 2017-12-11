@@ -25,7 +25,6 @@ public class fileHandler {
 
     public void createFile(String fileName) throws IOException {
         File file = new File(fileName);
-
         file.createNewFile();
     }
     /**
