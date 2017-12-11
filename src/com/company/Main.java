@@ -11,38 +11,18 @@ public class Main {
 
         Simulation sim = new Simulation(trace);
         State state = null;
-        fh.createFile("TBLS02.csv");
-        for (String currentAction: trace.getActionList()) {
-            sim.setZ(0.2);
-            state = new State(currentAction);
-            sim.execTBSL(state, "TBLS02.csv") ;
-            sim.resetVar();
-        }
 
-        fh.createFile("TBLS05.csv");
-        for (String currentAction: trace.getActionList()) {
-            sim.setZ(0.5);
-            state = new State(currentAction);
-            sim.execTBSL(state, "TBLS05.csv") ;
-            sim.resetVar();
-        }
+        double[] TBSLvalues = {0.0, 0.2, 0.5,0.7,1.0};
 
-        fh.createFile("TBLS07.csv");
-        for (String currentAction: trace.getActionList()) {
-            sim.setZ(0.7);
-            state = new State(currentAction);
-            sim.execTBSL(state, "TBLS07.csv") ;
-            sim.resetVar();
+        for (double z : TBSLvalues) {
+            fh.createFile("TBSL"+z+".csv");
+            for (String currentAction: trace.getActionList()) {
+                sim.setZ(z);
+                state = new State(currentAction);
+                sim.execTBSL(state, "TBSL"+z+".csv") ;
+                sim.resetVar();
+            }
         }
-
-        fh.createFile("TBLS10.csv");
-        for (String currentAction: trace.getActionList()) {
-            sim.setZ(1.0);
-            state = new State(currentAction);
-            sim.execTBSL(state, "TBLS10.csv") ;
-            sim.resetVar();
-        }
-
 
         // x: how certain is the idea
         // z: intuitive feeling in favor of the idea
