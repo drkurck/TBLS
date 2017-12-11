@@ -58,6 +58,26 @@ public class Simulation {
         }
     }
 
+    /**
+     * x, y, z should be set before
+     * @param currentState
+     * @param fileName
+     */
+    public void execGuideline(State currentState, String fileName) throws IOException {
+        for (String action: this.trace.getActionList()) {
+            Situation situation = new Situation(currentState, new State(action));
+            int m = trace.searchSimilarSituation(situation).size();
+
+            if (this.b == 0 && this.d == 0 && this.u == 1) {
+                this.computeGuidelineAtomicity(m);
+            } else {
+                this.computeGuideline(m);
+            }
+            fileHandler.writeResultInFile(this.b,this.d,this.u, this.a, fileName);
+        }
+
+    }
+
     private void computeRevelancy() {
         this.x = this.r/(this.r+this.s);
     }
@@ -71,9 +91,7 @@ public class Simulation {
     }
 
     private void computeTBSLAtomicity() {
-        System.out.println(trace.getHistorySituation().size());
         this.a = (double) 1/trace.getHistorySituation().size();
-        System.out.println(this.a);
     }
 
     public void computeGuideline(int stateCovered) {
@@ -85,7 +103,7 @@ public class Simulation {
     }
 
     private void computeGuidelineAtomicity(int stateCovered) {
-        this.a = stateCovered/trace.getHistorySituation().size();
+        this.a = (double) stateCovered/trace.getHistorySituation().size();
     }
 
     public void computeStatistcalEvidence() {
