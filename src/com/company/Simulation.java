@@ -78,6 +78,28 @@ public class Simulation {
 
     }
 
+    public void execStatisticalEvidence(State currentState, String fileName) throws IOException {
+        for (String action: this.trace.getActionList()) {
+            Situation situation = new Situation(currentState, new State(action));
+            List<Situation> extractedTrace = trace.searchSimilarSituation(situation);
+
+            double tmp = 0;
+            for (Situation tmpSituation: extractedTrace) {
+                tmp += Situation.computeOutcome(tmpSituation);
+            }
+
+            if (tmp > 0)
+                this.r++;
+            else
+                this.s++;
+
+            this.computeSE();
+            this.computeSEatomicity(extractedTrace.size());
+            fileHandler.writeResultInFile(this.b,this.d,this.u, this.a, fileName);
+
+        }
+    }
+
     private void computeRevelancy() {
         this.x = this.r/(this.r+this.s);
     }
@@ -94,7 +116,7 @@ public class Simulation {
         this.a = (double) 1/trace.getHistorySituation().size();
     }
 
-    public void computeGuideline(int stateCovered) {
+    private void computeGuideline(int stateCovered) {
         this.y = 1-this.z;
         this.b = this.z / (this.z + this.y + (1 - this.x));
         this.d = this.y / (this.z + this.y + (1 - this.x));
@@ -106,10 +128,14 @@ public class Simulation {
         this.a = (double) stateCovered/trace.getHistorySituation().size();
     }
 
-    public void computeStatistcalEvidence() {
+    private void computeSE() {
         this.b = this.r / (this.r + this.s + 2);
         this.d = this.s / (this.r + this.s + 2);
         this.u = 2 / (this.r + this.s + 2);
+    }
+
+    private void computeSEatomicity(int y) {
+        this.a = (double) (trace.getHistorySituation().size() + y) / trace.getHistorySituation().size();
     }
 
     public void resetVar() {

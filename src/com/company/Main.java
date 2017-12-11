@@ -38,5 +38,12 @@ public class Main {
                 }
             }
         }
+
+        fh.createFile("SE.csv");
+        for (String currentAction: trace.getActionList()) {
+            state = new State(currentAction);
+            sim.execStatisticalEvidence(state, "SE.csv"); ;
+            //sim.resetVar();
+        }
     }
 }
