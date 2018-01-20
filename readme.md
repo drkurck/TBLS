@@ -1,7 +1,7 @@
-#Project TBLS
+# Project TBLS
 
 Ce projet à été réalisé dans le cadre ma formation de master au sein de l'université de La Rochelle
-##Contexte scientifique
+## Contexte scientifique
 Les systèmes interactifs adaptatifs doivent s’adapter dynamiquement au comportement et
 progression de l’utilisateur dans l’application. Pour qu’elle soit efficace, cette adaptation doit tenir
 compte à la fois de la logique de l’utilisateur et de celle du concepteur tout en respectant les
@@ -21,14 +21,14 @@ hétérogènes par l’utilisation la logique subjective, basée sur les traces 
 précédentes, et, d’autre part, la mise en œuvre des algorithmes évoqués dans l’article afin
 d’illustrer l’approche retenue. Le cas d’étude retenu est l’entretien de l’être virtuel Tamagotchi.
 
-##Travail demandé
+## Travail demandé
 Dans le contexte décrit ci-dessus, l’équipe du projet aura en charge de concevoir des algorithmes
 pouvant modéliser les préférences de l’utilisateur dans le cas d’étude Tamagotchi. Ce travail devra
 proposer l’architecture socle de l’application et élaborer les divers composants de l’application
 considérée : les situations, le mécanisme de leur enchaînement, récolte, analyse et exploitation
 des traces pour pouvoir exprimer les préférences de l’utilisateur.
 
-##Articles scientifiques
+## Articles scientifiques
 Hoang Nam Ho, Mourad Rabah, Samuel Nowakowski, Pascal Estraillier. Application of Trace-Based Subjective Logic
 to User Preferences Modeling. Ansgar Fehnker, Annabelle McIver, Geoff Sutcliffe and Andrei Voronkov (editors). 20th
 International Conference on Logic for Programming, Artificial Intelligence and Reasoning, Nov 2015, Suva, Fiji. EPiC
