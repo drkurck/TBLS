@@ -28,7 +28,8 @@ public class fileHandler {
         file.createNewFile();
     }
     /**
-     * Reading the file to save all history state
+     * Reading the .txt file to save all history state
+     *
      */
     public History readFile() {
         Path file = Paths.get(this.statePath);
@@ -48,6 +49,7 @@ public class fileHandler {
                     splitedLine[index] = tokens.nextToken();
                     ++index;
                 }
+                //build each state of situation
                 State current = new State(splitedLine[0], Float.parseFloat(splitedLine[1]),  Float.parseFloat(splitedLine[2]), Float.parseFloat(splitedLine[3]));
                 State next = new State(splitedLine[4], Float.parseFloat(splitedLine[5]),  Float.parseFloat(splitedLine[6]), Float.parseFloat(splitedLine[7]));
 
@@ -60,7 +62,15 @@ public class fileHandler {
         return h;
     }
 
-    // Write result on a file
+    /**
+     * Write a output file of each situation
+     * @param b belief of the user on the current situation
+     * @param d disbelief of the user on the current situation
+     * @param u uncertainty of the user on the current situation
+     * @param a relative atomicity of the situation
+     * @param fileName
+     * @throws IOException
+     */
     static public void writeResultInFile(double b, double d, double u, double a, String fileName) throws IOException {
         String text = b + ";" + d + ";" + u + ";" + a + "\n";
         Files.write(Paths.get(fileName), text.getBytes(), StandardOpenOption.APPEND);

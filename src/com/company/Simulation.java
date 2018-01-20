@@ -4,6 +4,9 @@ package com.company;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class has for purpose to run the 3 algorythme
+ */
 public class Simulation {
     private double a;
     private double b;
@@ -28,6 +31,12 @@ public class Simulation {
         this.trace = h1;
     }
 
+    /**
+     * execution of Trace Based Subjective Logic
+     * @param currentState State to compare
+     * @param fileName output file
+     * @throws IOException
+     */
     public void execTBSL(State currentState, String fileName) throws IOException {
         for (String nextAction: trace.getActionList()) {
             Situation situation = new Situation(currentState, new State(nextAction));
@@ -59,9 +68,11 @@ public class Simulation {
     }
 
     /**
+     * The guideline method has the same execution has TBS execpt it
+     * don't use the history
      * x, y, z should be set before
-     * @param currentState
-     * @param fileName
+     * @param currentState State to compare
+     * @param fileName output file
      */
     public void execGuideline(State currentState, String fileName) throws IOException {
         for (String action: this.trace.getActionList()) {
@@ -78,6 +89,13 @@ public class Simulation {
 
     }
 
+    /**
+     * The statistical evidence use the mathematical
+     * approch it only take in account the outcome of a situation
+     * @param currentState State to compare
+     * @param fileName output file
+     * @throws IOException
+     */
     public void execStatisticalEvidence(State currentState, String fileName) throws IOException {
         for (String action: this.trace.getActionList()) {
             Situation situation = new Situation(currentState, new State(action));

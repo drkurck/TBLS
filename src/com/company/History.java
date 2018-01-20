@@ -4,6 +4,10 @@ package com.company;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This Classe is used for trace based execution
+ * Statistical evidence and TBSL
+ */
 public class History {
     private List<Situation> historySituation;
     private List<String> actionList;

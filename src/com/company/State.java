@@ -1,5 +1,9 @@
 package com.company;
 
+/**
+ * a State is composed of an action
+ * with properties changes
+ */
 public class State {
     private String name;
     private float health;

@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * Situation is composed of 2 state and outcome
+ */
 public class Situation {
     private State current;
     private State next;
